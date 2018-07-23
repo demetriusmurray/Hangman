@@ -83,7 +83,6 @@ public class Hangman {
             word2 = word3;
             indexGuess = word.indexOf(letter, indexGuess + 1);
         }
-
         if (!word2.contains("-")) {
             System.out.println(word3);
             System.out.println("You Won!");
@@ -107,13 +106,3 @@ public class Hangman {
         System.out.println(word3);
     }
 }
-
-//Mind Sex - Dead Presidents
-   /*
-     make it non case sensitive
-     Deal with multiple letters in a word
-
-
-     Question: Is it better to pass parameters through, call objects from other methods, or make objects global?
-
-*/
