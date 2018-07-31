@@ -17,19 +17,19 @@ public class Hangman {
     String word;
     String word2 = new String();
     String word3 = word2;
+    PrintOuts printOuts = new PrintOuts();
 
     int numAttemptsLeft;
     ArrayList<Character> attempts = new ArrayList<Character>();
     Scanner sc = new Scanner(System.in);
 
     public void homeScreen(String startTerm) {
-        System.out.println();
-        System.out.println("Press the 'ENTER' key to " + startTerm + "\n ...or type 'NO' to close game");
+        printOuts.printStart(startTerm);
         String startKey = sc.nextLine();
         if (startKey.length() == 0) {
             start();
         } else if (startKey.equals("NO")) {
-            System.out.println("Goodbye.");
+            printOuts.printGoodbye();
         } else homeScreen("begin playing");
     }
 
@@ -44,8 +44,8 @@ public class Hangman {
             word2 += "-";
         }
         word3 = word2;
-        System.out.println(word3);
-        System.out.println("You have " + numAttemptsLeft + " attempts remaining. Good luck!");
+        printOuts.displayWord(word3);
+        printOuts.printStartGame(numAttemptsLeft);
         readInput();
     }
 
@@ -62,8 +62,7 @@ public class Hangman {
             attempts.add(letter);
             rightOrWrong(letter);
         } else {
-            System.out.println("This letter '" + letter + "' was already guessed.");
-            System.out.println("You still have " + numAttemptsLeft + " remaining.");
+            printOuts.previousGuess(letter, numAttemptsLeft);
         }
     }
 
@@ -84,25 +83,25 @@ public class Hangman {
             indexGuess = word.indexOf(letter, indexGuess + 1);
         }
         if (!word2.contains("-")) {
-            System.out.println(word3);
-            System.out.println("You Won!");
+            printOuts.displayWord(word3);
+            printOuts.printWon();
             homeScreen("play again");
         } else {
-            System.out.println(word3);
-            System.out.println("\nNice! " + "'" + letter + "' is in this word.\nYou still have " + numAttemptsLeft + " attempts remaining.");
-            System.out.println("Your previous attempts are " + attempts);
+            printOuts.displayWord(word3);
+            printOuts.printRightGuess(letter, numAttemptsLeft);
+            printOuts.printAttempts(attempts);
         }
     }
 
     public void wrongAnswer() {
-        if (numAttemptsLeft == 0) {
-            System.out.println("You have no attempts left.");
-            System.out.println("The word you were trying to rightOrWrong was '" + word + "'");
-            homeScreen("try again");
-        }
-        System.out.println("This is not a letter");
         numAttemptsLeft--;
-        System.out.println("You have " + numAttemptsLeft + " attempts remaining.");
-        System.out.println(word3);
+        if (numAttemptsLeft == 0) {
+            printOuts.printLose (word);
+            homeScreen("try again");
+        } else {
+            printOuts.printWrongGuess(numAttemptsLeft);
+            printOuts.printAttempts(attempts);
+            printOuts.displayWord(word3);
+        }
     }
 }

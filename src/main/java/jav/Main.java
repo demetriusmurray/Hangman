@@ -7,7 +7,6 @@ public class Main {
         Hangman hangman = new Hangman();
         System.out.println("Let's Play Hangman!");
         hangman.homeScreen("begin playing");
-        System.out.println("Goodbye.");
     }
 }
 
