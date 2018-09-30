@@ -34,7 +34,7 @@ public class PrintOuts {
     public void previousGuess(char letter, int numAttemptsLeft){
         attemptPlural(numAttemptsLeft);
         System.out.println("This letter '" + letter + "' was already guessed.");
-        System.out.println("You still have " + numAttemptsLeft + attemptWord + " remaining.");
+        System.out.println("You still have " + numAttemptsLeft + " " + attemptWord + " remaining.");
     }
 
     public void printAttempts(ArrayList<Character> attempts) {

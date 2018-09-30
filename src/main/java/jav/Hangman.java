@@ -51,9 +51,15 @@ public class Hangman {
 
     public void readInput() {
         while (numAttemptsLeft > 0) {
-            char userInput = sc.nextLine().charAt(0);
-            userInput = Character.toUpperCase(userInput);
-            storeInput(userInput);
+            try {
+                char userInput = sc.nextLine().charAt(0);
+                userInput = Character.toUpperCase(userInput);
+                storeInput(userInput);
+            }
+            catch (Exception a) {
+                System.out.println("You have to make a guess. Try again");
+                readInput();
+            }
         }
     }
 
